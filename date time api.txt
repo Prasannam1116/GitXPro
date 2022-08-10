@@ -1,0 +1,550 @@
+Java Date and Time
+
+The java.time, java.util, java.sql and java.text packages contains classes for representing date and time. Following classes are important for dealing with date in java.
+
+Java 8 Date/Time API
+
+Java has introduced a new Date and Time API since Java 8. The java.time package contains Java 8 Date and Time classes.
+
+java.time.LocalDate class
+java.time.LocalTime class
+java.time.LocalDateTime class
+java.time.MonthDay class
+java.time.OffsetTime class
+java.time.OffsetDateTime class
+java.time.Clock class
+java.time.ZonedDateTime class
+java.time.ZoneId class
+java.time.ZoneOffset class
+java.time.Year class
+java.time.YearMonth class
+java.time.Period class
+java.time.Duration class
+java.time.Instant class
+java.time.DayOfWeek enum
+java.time.Month enum
+Classical Date/Time API
+
+But classical or old Java Date API is also useful. Let's see the list of classical Date and Time classes.
+
+java.util.Date class
+java.sql.Date class
+java.util.Calendar class
+java.util.GregorianCalendar class
+java.util.TimeZone class
+java.sql.Time class
+java.sql.Timestamp class
+Formatting Date and Time
+
+We can format date and time in java by the use of following classes:
+
+java.text.DateFormat class
+java.text.SimpleDateFormat class
+Get Current Date and Time
+
+We can get current date and time in java by many ways.
+
+How to get current Date and Time
+
+Java LocalDate class
+
+Java LocalDate class is an immutable class that represents Date with a default format of yyyy-MM-dd. It inherits Object class and implements the ChronoLocalDate interface
+
+Java LocalDate class declaration
+
+Let's see the declaration of java.time.LocalDate class.
+
+public final class LocalDate extends Object   
+implements Temporal, TemporalAdjuster, ChronoLocalDate, Serializable 
+ 
+Methods of Java LocalDate
+
+Method	Description
+LocalDateTime atTime(int hour, int minute)	
+It is used to combine this date with a time to create a LocalDateTime.
+
+int compareTo(ChronoLocalDate other)	
+It is used to compares this date to another date.
+
+boolean equals(Object obj)	
+It is used to check if this date is equal to another date.
+
+String format(DateTimeFormatter formatter)	
+It is used to format this date using the specified formatter.
+
+int get(TemporalField field)	
+It is used to get the value of the specified field from this date as an int.
+
+boolean isLeapYear()	It is used to check if the year is a leap year, according to the ISO proleptic calendar system rules.
+
+LocalDate minusDays(long daysToSubtract)	It is used to return a copy of this LocalDate with the specified number of days subtracted.
+
+LocalDate minusMonths(long monthsToSubtract)	It is used to return a copy of this LocalDate with the specified number of months subtracted.
+
+static LocalDate now()	It is used to obtain the current date from the system clock in the default time-zone.
+
+LocalDate plusDays(long daysToAdd)	It is used to return a copy of this LocalDate with the specified number of days added.
+
+LocalDate	plusMonths(long monthsToAdd)	It is used to return a copy of this LocalDate with the specified number of months added.
+
+Java LocalDate Example
+
+import java.time.LocalDate;  
+public class LocalDateExample {  
+  public static void main(String[] args) {  
+    LocalDate date = LocalDate.now();  
+    LocalDate yesterday = date.minusDays(1);  
+    LocalDate tomorrow = yesterday.plusDays(2);  
+    System.out.println("Today date: "+date);  
+    System.out.println("Yesterday date: "+yesterday);  
+    System.out.println("Tommorow date: "+tomorrow);  
+  }  
+}  
+Output:
+
+Today date: 2017-01-13
+Yesterday date: 2017-01-12
+Tommorow date: 2017-01-14
+Java LocalDate Example: isLeapYear()
+
+import java.time.LocalDate;  
+public class LocalDateExample {  
+  public static void main(String[] args) {  
+    LocalDate date1 = LocalDate.of(2017, 1, 13);  
+    System.out.println(date1.isLeapYear());  
+    LocalDate date2 = LocalDate.of(2016, 9, 23);  
+    System.out.println(date2.isLeapYear());  
+  }  
+}  
+Output:
+
+false
+true
+Java LocalDate Example: atTime()
+
+import java.time.*;  
+public class LocalDateExample {  
+  public static void main(String[] args) {  
+    LocalDate date = LocalDate.of(2017, 1, 13);  
+    LocalDateTime datetime = date.atTime(1,50,9);      
+    System.out.println(datetime);   
+  }  
+}  
+Output:
+
+2017-01-13T01:50:09
+
+Java LocalTime class
+
+Java LocalTime class is an immutable class that represents time with a default format of hour-minute-second. It inherits Object class and implements the Comparable interface.
+
+Java LocalTime class declaration
+
+Let's see the declaration of java.time.LocalTime class.
+
+public final class LocalTime extends Object   
+implements Temporal, TemporalAdjuster, Comparable<LocalTime>, Serializable  
+Methods of Java LocalTime
+
+Method	Description
+LocalDateTime atDate(LocalDate date)	It is used to combine this time with a date to create a LocalDateTime.
+
+int compareTo(LocalTime other)	It is used to compare this time to another time.
+
+String format(DateTimeFormatter formatter)	It is used to format this time using the specified formatter.
+
+int get(TemporalField field)	It is used to get the value of the specified field from this time as an int.
+
+LocalTime minusHours(long hoursToSubtract)	It is used to return a copy of this LocalTime with the specified number of hours subtracted.
+
+LocalTime minusMinutes(long minutesToSubtract)	It is used to return a copy of this LocalTime with the specified number of minutes subtracted.
+
+static LocalTime now()	It is used to obtain the current time from the system clock in the default time-zone.
+
+static LocalTime of(int hour, int minute, int second)	It is used to obtain an instance of LocalTime from an hour, minute and second.
+
+LocalTime plusHours(long hoursToAdd)	It is used to return a copy of this LocalTime with the specified number of hours added.
+
+LocalTime plusMinutes(long minutesToAdd)	It is used to return a copy of this LocalTime with the specified number of minutes added.
+
+Java LocalTime Example: now()
+
+import java.time.LocalTime;  
+public class LocalTimeExample {  
+  public static void main(String[] args) {  
+    LocalTime time = LocalTime.now();  
+    System.out.printl(time);  
+  }  
+}  
+Output:
+
+15:19:47.459
+Java LocalTime Example: of()
+
+import java.time.LocalTime;  
+public class LocalDateExample {  
+  public static void main(String[] args) {  
+    LocalTime time = LocalTime.of(10,43,12);  
+    System.out.println(time);  
+  }  
+}  
+Output:
+
+10:43:12
+Java LocalTime Example: minusHours() and minusMinutes()
+
+import java.time.LocalTime;  
+public class LocalDateExample {  
+  public static void main(String[] args) {  
+    LocalTime time1 = LocalTime.of(10,43,12);  
+    System.out.println(time1);  
+    LocalTime time2=time1.minusHours(2);  
+    LocalTime time3=time2.minusMinutes(34);  
+    System.out.println(time3);  
+  }  
+}  
+Output:
+
+10:43:12
+08:09:12
+Java LocalTime Example: plusHours() and plusMinutes()
+
+import java.time.LocalTime;  
+public class LocalTimeExample {  
+  public static void main(String[] args) {  
+    LocalTime time1 = LocalTime.of(10,43,12);  
+    System.out.println(time1);  
+    LocalTime time2=time1.plusHours(4);  
+    LocalTime time3=time2.plusMinutes(18);  
+    System.out.println(time3);  
+  }  
+}  
+Output:
+
+10:43:12
+15:01:12
+Java LocalTime Example
+
+import java.time.*;  
+import java.time.temporal.ChronoUnit;  
+public class LocalTimeExample {  
+  public static void main(String... args) {  
+    ZoneId zone1 = ZoneId.of("Asia/Kolkata");  
+    ZoneId zone2 = ZoneId.of("Asia/Tokyo");  
+    LocalTime time1 = LocalTime.now(zone1);  
+    System.out.println("India Time Zone: "+time1);  
+    LocalTime time2 = LocalTime.now(zone2);  
+    System.out.println("Japan Time Zone: "+time2);  
+    long hours = ChronoUnit.HOURS.between(time1, time2);  
+    System.out.println("Hours between two Time Zone: "+hours);  
+    long minutes = ChronoUnit.MINUTES.between(time1, time2);  
+    System.out.println("Minutes between two time zone: "+minutes);  
+  }  
+}  
+Output:
+
+India Time Zone: 14:56:43.087
+Japan Time Zone: 18:26:43.103
+Hours between two Time Zone: 3
+Minutes between two time zone: 210
+Java LocalDateTime Example
+
+import java.time.LocalDateTime;  
+import java.time.format.DateTimeFormatter;  
+public class LocalDateTimeExample {  
+    public static void main(String[] args) {  
+        LocalDateTime ldt = LocalDateTime.now();  
+        System.out.println("Before Formatting: " + now);  
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");  
+        String formatDateTime = ldt.format(fmt);  
+        System.out.println("After Formatting: " + formatDateTime);  
+    }  
+}  
+Output:
+
+Before Formatting: 2017-01-13T17:09:42.411
+After Formatting: 13-01-2017 17:09:42
+Java LocalDateTime Example: now()
+
+import java.time.LocalDateTime;  
+import java.time.format.DateTimeFormatter;  
+public class LocalDateTimeExample {  
+  public static void main(String[] args) {  
+    LocalDateTime datetime1 = LocalDateTime.now();  
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");  
+    String formatDateTime = datetime1.format(format);   
+    System.out.println(formatDateTime);    
+  }  
+}  
+Output:
+
+14-01-2017 11:42:32
+Java LocalDateTime Example: get()
+
+import java.time.LocalDateTime;  
+import java.time.temporal.ChronoField;  
+public class LocalDateTimeExample {  
+  public static void main(String[] args) {  
+    LocalDateTime a = LocalDateTime.of(2017, 2, 13, 15, 56);    
+    System.out.println(a.get(ChronoField.DAY_OF_WEEK));  
+    System.out.println(a.get(ChronoField.DAY_OF_YEAR));  
+    System.out.println(a.get(ChronoField.DAY_OF_MONTH));  
+    System.out.println(a.get(ChronoField.HOUR_OF_DAY));  
+    System.out.println(a.get(ChronoField.MINUTE_OF_DAY));   
+  }  
+}  
+Output:
+
+1
+44
+13
+15
+956
+Java LocalDateTime Example: minusDays()
+
+import java.time.LocalDateTime;  
+import java.time.format.DateTimeFormatter;  
+public class LocalDateTimeExample {  
+public static void main(String[] args) {  
+  LocalDateTime datetime1 = LocalDateTime.of(2017, 1, 14, 10, 34);  
+  LocalDateTime datetime2 = datetime1.minusDays(100);  
+  System.out.println("Before Formatting: " + datetime2);  
+  DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");  
+  String formatDateTime = datetime2.format(format);   
+  System.out.println("After Formatting: " + formatDateTime );  
+}  
+}  
+Output:
+
+Before Formatting: 2016-10-06T10:34
+After Formatting: 06-10-2016 10:34
+Java LocalDateTime Example: plusDays()
+
+import java.time.LocalDateTime;  
+import java.time.format.DateTimeFormatter;  
+public class LocalDateTimeExample {  
+public static void main(String[] args) {  
+  LocalDateTime datetime1 = LocalDateTime.of(2017, 1, 14, 10, 34);  
+  LocalDateTime datetime2 = datetime1.plusDays(120);  
+  System.out.println("Before Formatting: " + datetime2);  
+  DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");  
+  String formatDateTime = datetime2.format(format);   
+  System.out.println("After Formatting: " + formatDateTime );  
+}  
+}  
+Output:
+
+Before Formatting: 2017-05-14T10:34
+After Formatting: 14-05-2017 10:34
+
+Java Calendar Class
+
+Java Calendar class is an abstract class that provides methods for converting date between a specific instant in time and a set of calendar fields such as MONTH, YEAR, HOUR, etc. It inherits Object class and implements the Comparable interface.
+
+Java Calendar class declaration
+
+Let's see the declaration of java.util.Calendar class.
+
+public abstract class Calendar extends Object   
+implements Serializable, Cloneable, Comparable<Calendar>  
+Methods of Java Calendar
+
+Method	Description
+abstract void add(int field, int amount)	It is used to add or subtract the specified amount of time to the given calendar field, based on the calendar's rules.
+
+int get(int field)	It is used to return the value of the given calendar field.
+static Calendar getInstance()	It is used to get a calendar using the default time zone and locale.
+abstract int getMaximum(int field)	It is used to return the maximum value for the given calendar field of this Calendar instance.
+abstract int getMinimum(int field)	It is used to return the minimum value for the given calendar field of this Calendar instance.
+void set(int field, int value)	It is used to set the given calendar field to the given value.
+void setTime(Date date)	It is used to set this Calendar's time with the given Date.
+Date getTime()	It is used to return a Date object representing this Calendar's time value.
+Java Calendar Class Example
+
+import java.util.Calendar;  
+public class CalendarExample {  
+   public static void main(String[] args) {  
+   Calendar calendar = Calendar.getInstance();  
+   System.out.println("The current date is : " + calendar.getTime());  
+   calendar.add(Calendar.DATE, -15);  
+   System.out.println("15 days ago: " + calendar.getTime());  
+   calendar.add(Calendar.MONTH, 4);  
+   System.out.println("4 months later: " + calendar.getTime());  
+   calendar.add(Calendar.YEAR, 2);  
+   System.out.println("2 years later: " + calendar.getTime());  
+   }  
+}  
+Output:
+
+The current date is : Thu Jan 19 18:47:02 IST 2017
+15 days ago: Wed Jan 04 18:47:02 IST 2017
+4 months later: Thu May 04 18:47:02 IST 2017
+2 years later: Sat May 04 18:47:02 IST 2019
+Java Calendar Class Example: get()
+
+import java.util.*;  
+public class CalendarExample{  
+  public static void main(String[] args) {  
+   Calendar calendar = Calendar.getInstance();  
+   System.out.println("At present Calendar's Year: " + calendar.get(Calendar.YEAR));  
+   System.out.println("At present Calendar's Day: " + calendar.get(Calendar.DATE));  
+   }  
+}  
+Output:
+
+At present Calendar's Year: 2017
+At present Calendar's Day: 20
+Java Calendar Class Example: getInstance()
+
+import java.util.*;  
+public class CalendarExample{  
+   public static void main(String[] args) {  
+   Calendar calendar = Calendar.getInstance();  
+   System.out.print("At present Date And Time Is: " + calendar.getTime());  
+   }  
+}  
+Output:
+
+At present Date And Time Is: Fri Jan 20 14:26:19 IST 2017
+Java Calendar Class Example: getMaximum()
+
+import java.util.*;  
+public class CalendarExample {  
+   public static void main(String[] args) {  
+   Calendar calendar = Calendar.getInstance();  
+   int maximum = calendar.getMaximum(Calendar.DAY_OF_WEEK);  
+   System.out.println("Maximum number of days in week: " + maximum);  
+   maximum = calendar.getMaximum(Calendar.WEEK_OF_YEAR);  
+   System.out.println("Maximum number of weeks in year: " + maximum);  
+   }  
+}  
+Output:
+
+Maximum number of days in week: 7
+Maximum number of weeks in year: 53
+Java Calendar Class Example: getMinimum()
+
+import java.util.*;  
+public class CalendarExample {  
+   public static void main(String[] args) {  
+   Calendar cal = Calendar.getInstance();  
+   int maximum = cal.getMinimum(Calendar.DAY_OF_WEEK);  
+   System.out.println("Minimum number of days in week: " + maximum);  
+   maximum = cal.getMinimum(Calendar.WEEK_OF_YEAR);  
+   System.out.println("Minimum number of weeks in year: " + maximum);  
+   }  
+}  
+Output:
+
+Minimum number of days in week: 1
+Minimum number of weeks in year: 1
+
+
+
+
+Variable Argument (Varargs):
+
+The varrags allows the method to accept zero or muliple arguments. Before varargs either we use overloaded method or take an array as the method parameter but it was not considered good because it leads to the maintenance problem. If we don't know how many argument we will have to pass in the method, varargs is the better approach.
+
+Advantage of Varargs:
+
+We don't have to provide overloaded methods so less code.
+
+Syntax of varargs:
+
+The varargs uses ellipsis i.e. three dots after the data type. Syntax is as follows:
+
+return_type method_name(data_type... variableName){}  
+
+ 
+Simple Example of Varargs in java:
+
+    
+class VarargsExample1{  
+   
+ static void display(String... values){  
+  System.out.println("display method invoked ");  
+ }  
+  
+ public static void main(String args[]){  
+  
+ display();//zero argument   
+ display("my","name","is","varargs");//four arguments  
+ }   
+}  
+      
+Test it Now
+Output:display method invoked
+       display method invoked
+Another Program of Varargs in java:
+
+    
+class VarargsExample2{  
+   
+ static void display(String... values){  
+  System.out.println("display method invoked ");  
+  for(String s:values){  
+   System.out.println(s);  
+  }  
+ }  
+  
+ public static void main(String args[]){  
+  
+ display();//zero argument   
+ display("hello");//one argument   
+ display("my","name","is","varargs");//four arguments  
+ }   
+}  
+      
+Test it Now
+Output:display method invoked
+       display method invoked
+       hello
+       display method invoked
+       my
+       name
+       is 
+       varargs
+download this example
+
+Rules for varargs:
+
+While using the varargs, you must follow some rules otherwise program code won't compile. The rules are as follows:
+
+There can be only one variable argument in the method.
+Variable argument (varargs) must be the last argument.
+Examples of varargs that fails to compile:
+
+    
+void method(String... a, int... b){}//Compile time error  
+  
+void method(int... a, String b){}//Compile time error  
+      
+Example of Varargs that is the last argument in the method:
+
+    
+class VarargsExample3{  
+   
+ static void display(int num, String... values){  
+  System.out.println("number is "+num);  
+  for(String s:values){  
+   System.out.println(s);  
+  }  
+ }  
+  
+ public static void main(String args[]){  
+  
+ display(500,"hello");//one argument   
+ display(1000,"my","name","is","varargs");//four arguments  
+ }   
+}  
+      
+Test it Now
+Output:number is 500
+       hello
+       number is 1000
+       my
+       name
+       is 
+       varargs
+download this example
